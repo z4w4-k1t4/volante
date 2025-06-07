@@ -1,0 +1,43 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.1-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'jp.co.volante'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '21' // Javaバージョンは環境に合わせて
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    // (任意) lombokを使う場合
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // (任意) テスト
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
