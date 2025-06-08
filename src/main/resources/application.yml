@@ -3,9 +3,10 @@ spring:
         name: volante
 
     datasource:
-        url: jdbc:mariadb://localhost:3306/test1
+        url: jdbc:mariadb://localhost:3306/develop
         username: root
         password: password
+        driver-class-name: org.mariadb.jdbc.Driver
         hikari:
             maximum-pool-size: 10
     
@@ -15,3 +16,14 @@ spring:
         database-platform: org.hibernate.dialect.MariaDBDialect
         show-sql: true   # SQL出力が欲しい場合
     # HikariCPコネクションプールの設定（任意）
+server:
+    servlet:
+        encoding:
+                enabled: true
+                charset: UTF-8
+                force: true
+
+logging:
+    level:
+     "[org.hibernate.SQL]": DEBUG
+     "[org.hibernate.type.descriptor.sql.BasicBinder]": TRACE
