@@ -43,7 +43,7 @@ public class User {
     private Long createUserId;
 
     @LastModifiedDate
-    @Column(name = "updata_at", columnDefinition = "COMMENT '更新日時'")
+    @Column(name = "update_at", columnDefinition = "COMMENT '更新日時'")
     private LocalDateTime updateAt;
 
     @Column(name = "update_user_id", columnDefinition = "BIGINT COMMENT '更新ユーザーID'")
