@@ -15,3 +15,8 @@ spring:
         database-platform: org.hibernate.dialect.MariaDBDialect
         show-sql: true   # SQL出力が欲しい場合
     # HikariCPコネクションプールの設定（任意）
+
+logging:
+    level:
+        root: INFO
+        '[jp.co.volante]': DEBUG  # パッケージごとに設定可能

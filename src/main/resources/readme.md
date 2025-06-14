@@ -1,0 +1,1 @@
+ここにfirebaseから取得したjsonをfirebase-private-key.jsonというファイル名で保存して
