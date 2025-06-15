@@ -17,6 +17,13 @@ spring:
         show-sql: true   # SQL出力が欲しい場合
     # HikariCPコネクションプールの設定（任意）
 
+logging:
+    level:
+         "[org.hibernate.SQL]": DEBUG
+         "[org.hibernate.type.descriptor.sql.BasicBinder]": TRACE
+         root: INFO
+         '[jp.co.volante]': DEBUG  # パッケージごとに設定可能
+
 server:
     servlet:
         encoding:
@@ -24,7 +31,3 @@ server:
                 charset: UTF-8
                 force: true
 
-logging:
-    level:
-     "[org.hibernate.SQL]": DEBUG
-     "[org.hibernate.type.descriptor.sql.BasicBinder]": TRACE
