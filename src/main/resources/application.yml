@@ -27,7 +27,7 @@ logging:
 server:
     servlet:
         encoding:
-                enabled: true
-                charset: UTF-8
-                force: true
+            enabled: true
+            charset: UTF-8
+            force: true
 

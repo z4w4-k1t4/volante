@@ -7,11 +7,15 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
+import jp.co.volante.microblog.dto.RequestMicroBlogDto;
+import jp.co.volante.microblog.dto.ResponseMicroBlogDto;
 
 @RestController
 @RequestMapping("/api/")
@@ -55,5 +59,20 @@ public class MicroBlogController {
         response.put("branchNo", deleted.getBranchNo());
         response.put("deleteAt", deleted.getDeleteAt());
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/microblogs/{id}/{branchNo}")
+    public ResponseMicroBlogDto getMicroBlogById(@PathVariable Long id, @PathVariable Long branchNo) {
+        return microBlogService.getMicroBlogById(id, branchNo);
+    }
+
+    @GetMapping("/microblogs/postContent/{id}/{branchNo}")
+    public List<ResponseMicroBlogDto> getMicroBlogsByPostContent(@RequestParam String postContent) {
+        return microBlogService.getMicroBlogsByPostContent(postContent);
+    }
+
+    @GetMapping("/microblogs/ownerUserId/{id}/{branchNo}")
+    public List<ResponseMicroBlogDto> getMicroBlogsByOwnerUserId(@RequestParam Long ownerUserId) {
+        return microBlogService.getMicroBlogsByOwnerUserId(ownerUserId);
     }
 }

@@ -16,7 +16,7 @@ public interface MicroBlogRepository extends JpaRepository<MicroBlog, MicroBlogI
 
     List<MicroBlog> findByBranchNo(Long keyword); // 更新枝番号で情報取得
 
-    List<MicroBlog> findByPostContentContaining(String keyword); // 投稿内容で情報取得
+    List<MicroBlog> findByPostContent(String keyword); // 投稿内容で情報取得
 
     List<MicroBlog> findByOwnerUserId(Long keyword); // 投稿者IDで情報取得
 

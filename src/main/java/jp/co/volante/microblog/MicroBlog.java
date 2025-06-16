@@ -47,6 +47,10 @@ public class MicroBlog {
         return branchNo;
     } // 更新枝番号
 
+    public String getPostContent() {
+        return postContent;
+    } // 投稿内容
+
     public Long getOwnerUserId() {
         return ownerUserId;
     } // 所有者ユーザID
