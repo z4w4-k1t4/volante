@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import jp.co.volante.microblog.dto.RequestMicroBlogDto;
 import jp.co.volante.microblog.dto.ResponseMicroBlogDto;
 
 @Service
@@ -73,4 +72,5 @@ public class MicroBlogService {
                 .map(this::toResponseDto)
                 .collect(Collectors.toList());
     }
+
 }

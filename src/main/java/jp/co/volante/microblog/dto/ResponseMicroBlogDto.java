@@ -14,4 +14,5 @@ public class ResponseMicroBlogDto {
     private Long createUserId; // 作成ユーザーID
     private LocalDateTime deleteAt; // 削除日時
     private Long deleteUserId; // 削除ユーザーID
+
 }

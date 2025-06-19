@@ -5,6 +5,8 @@ package jp.co.volante.microblog;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.*;
 
 @IdClass(MicroBlogId.class)
@@ -26,12 +28,14 @@ public class MicroBlog {
     @Column(name = "owner_user_id")
     private Long ownerUserId; // 所有者ユーザーID
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Column(name = "create_at")
     private LocalDateTime createAt; // 作成日時
 
     @Column(name = "create_user_id")
     private Long createUserId; // 作成ユーザーID
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Column(name = "delete_at")
     private LocalDateTime deleteAt; // 削除日時
 

@@ -1,7 +1,7 @@
 package jp.co.volante.microblog;
 
 import java.io.Serializable;
-
+import java.util.Objects;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
@@ -28,7 +28,7 @@ public class MicroBlogId implements Serializable {
         return id;
     }
 
-    public Long getBrunch_no() {
+    public Long getBranchNo() {
         return branchNo;
     }
 
@@ -37,7 +37,24 @@ public class MicroBlogId implements Serializable {
         this.id = id;
     }
 
-    public void setBrunch_no(Long branchNo) {
+    public void setBranchNo(Long branchNo) {
         this.branchNo = branchNo;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof MicroBlogId))
+            return false;
+        MicroBlogId that = (MicroBlogId) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(branchNo, that.branchNo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, branchNo);
+    }
+
 }

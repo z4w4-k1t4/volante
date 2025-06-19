@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestParam;
-import jp.co.volante.microblog.dto.RequestMicroBlogDto;
 import jp.co.volante.microblog.dto.ResponseMicroBlogDto;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 
 public class MicroBlogController {
 
@@ -37,12 +36,20 @@ public class MicroBlogController {
     // 投稿の新規登録(branchNo,postContent,ownerUserId,createAtをPOSTリクエストに送る)
     @PostMapping("/new-post")
     public ResponseEntity<Map<String, Object>> createContent(@RequestBody MicroBlog microBlog) {
-        MicroBlog savedBlog = microBlogService.createMicroBlog(microBlog);
-
-        Map<String, Object> response = new HashMap<String, Object>();
-        response.put("message", "投稿に成功しました！");
-        response.put("id", savedBlog.getId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        try {
+            System.out.println("Received postContent: " + microBlog.getPostContent());
+            MicroBlog savedBlog = microBlogService.createMicroBlog(microBlog);
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "投稿に成功しました！");
+            response.put("id", savedBlog.getId());
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "エラーが発生しました");
+            errorResponse.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
     }
 
     // 削除フラグの更新(id,branchNo,deleteAtをPUTリクエストに送る)
@@ -66,13 +73,27 @@ public class MicroBlogController {
         return microBlogService.getMicroBlogById(id, branchNo);
     }
 
-    @GetMapping("/microblogs/postContent/{id}/{branchNo}")
-    public List<ResponseMicroBlogDto> getMicroBlogsByPostContent(@RequestParam String postContent) {
-        return microBlogService.getMicroBlogsByPostContent(postContent);
+    @GetMapping("/microblogs/postContent")
+    public ResponseEntity<?> getMicroBlogsByPostContent(@RequestParam String postContent) {
+        try {
+            List<ResponseMicroBlogDto> resultList = microBlogService.getMicroBlogsByPostContent(postContent);
+            if (resultList.isEmpty()) {
+                Map<String, Object> error = new HashMap<>();
+                error.put("message", "該当する投稿が見つかりませんでした");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+            return ResponseEntity.ok(resultList);
+        } catch (Exception e) {
+            Map<String, Object> error = new HashMap<>();
+            error.put("message", "検索中にエラーが発生しました");
+            error.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
     }
 
     @GetMapping("/microblogs/ownerUserId/{id}/{branchNo}")
     public List<ResponseMicroBlogDto> getMicroBlogsByOwnerUserId(@RequestParam Long ownerUserId) {
         return microBlogService.getMicroBlogsByOwnerUserId(ownerUserId);
     }
+
 }
