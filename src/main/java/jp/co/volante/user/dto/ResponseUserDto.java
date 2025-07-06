@@ -7,9 +7,10 @@ import lombok.Data;
 @Data
 public class ResponseUserDto {
     private Long id;
-    private String uid;
+    private Long branchNo;
     private String displayName;
     private String email;
+    private String uid;
     private LocalDateTime createAt;
     private Long createUserId;
     private LocalDateTime updateAt;

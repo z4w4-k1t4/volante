@@ -1,9 +1,9 @@
-HELP.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+>>>>>>> 5b9ad807f0c1ea0934e77392323d45a64cbb4c9f
 
 ### STS ###
 .apt_generated
@@ -35,5 +35,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-**/resources/firebase-service-account.json

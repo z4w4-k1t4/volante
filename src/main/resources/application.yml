@@ -3,20 +3,35 @@ spring:
         name: volante
 
     datasource:
-        url: jdbc:mariadb://localhost:3306/test1
+        url: jdbc:mariadb://localhost:3306/test1?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8mb4
         username: root
         password: password
+        driver-class-name: org.mariadb.jdbc.Driver
         hikari:
             maximum-pool-size: 10
     
     jpa:
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
         database-platform: org.hibernate.dialect.MariaDBDialect
         show-sql: true   # SQL出力が欲しい場合
     # HikariCPコネクションプールの設定（任意）
 
 logging:
     level:
-        root: INFO
-        '[jp.co.volante]': DEBUG  # パッケージごとに設定可能
+         "[org.hibernate.SQL]": DEBUG
+         "[org.hibernate.type.descriptor.sql.BasicBinder]": TRACE
+         root: INFO
+         "[org.springframework.web]": DEBUG
+         '[jp.co.volante]': DEBUG  # パッケージごとに設定可能
+
+server:
+    error:
+        include-message: always
+        include-stacktrace: always
+    servlet:
+        encoding:
+            enabled: true
+            charset: UTF-8
+            force: true
+
